@@ -1,7 +1,10 @@
 import React from 'react';
 import {Pressable, Share, Text, View} from 'react-native';
-import {DetailType} from '../slices/details';
+import detailsSlice, {DetailType} from '../slices/details';
 import {useCallback} from 'react';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store/reducer';
+import {useAppDispatch} from '../store';
 
 interface PropsType {
   data?: DetailType;
@@ -21,16 +24,33 @@ const TEMP = {
 };
 
 const CardComponent = ({data}: PropsType) => {
+  const dispatch = useAppDispatch();
   const onPressShare = useCallback(() => {
     Share.share({
       url: TEMP.link,
     });
   }, []);
+  const likedList = useSelector((state: RootState) => state.details.liked);
+  const liked = likedList.includes(TEMP.id);
+  const onPressLike = useCallback(() => {
+    if (liked) {
+      dispatch(detailsSlice.actions.disliked(TEMP.id));
+      TEMP.like_cnt--;
+    } else {
+      dispatch(detailsSlice.actions.liked(TEMP.id));
+      TEMP.like_cnt++;
+    }
+  }, [liked, dispatch]);
   return (
     <View>
       <Text>카드입니다~</Text>
       <Pressable onPress={onPressShare}>
         <Text>공유하기에요</Text>
+      </Pressable>
+      <Pressable>
+        <Text style={{color: liked ? 'red' : 'black'}} onPress={onPressLike}>
+          좋아효~ {TEMP.like_cnt}
+        </Text>
       </Pressable>
     </View>
   );
