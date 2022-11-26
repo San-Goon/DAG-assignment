@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-interface DetailType {
+export interface DetailType {
   id: number;
   sector_id: number;
   title: string;

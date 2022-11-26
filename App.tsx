@@ -9,6 +9,21 @@ import Investment from './src/pages/Investment';
 const App = () => {
   const Tab = createBottomTabNavigator();
 
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const data = await axios.get(
+  //         'https://test.daground.io/info/contents',
+  //         // { headers: {'TEST-AUTH': 'sandbankfrontend'}, }
+  //       );
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error(error.response);
+  //     }
+  //   };
+  //   getData();
+  // }, []);
+
   return (
     <NavigationContainer>
       <Tab.Navigator>
