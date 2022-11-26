@@ -1,5 +1,5 @@
-import React from 'react';
-import {Pressable, Share, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Image, Pressable, Share, Text, View, Dimensions} from 'react-native';
 import detailsSlice, {DetailType} from '../slices/details';
 import {useCallback} from 'react';
 import {useSelector} from 'react-redux';
@@ -10,7 +10,7 @@ interface PropsType {
   data?: DetailType;
 }
 
-const TEMP = {
+const data = {
   id: 59,
   sector_id: 1,
   title: '왜 주식과 비트코인은 함께 떨어질까',
@@ -23,35 +23,59 @@ const TEMP = {
   like_top: 1,
 };
 
-const CardComponent = ({data}: PropsType) => {
+const CardComponent = ({data: temp}: PropsType) => {
+  const [height, setHeight] = useState(0);
+
+  // 이미지 크기 잡아주는 부분
+  const {width} = Dimensions.get('window');
+  Image.getSize(data.image, (w, h) => {
+    setHeight(h * (width / w));
+  });
+
   const dispatch = useAppDispatch();
+
   const onPressShare = useCallback(() => {
     Share.share({
-      url: TEMP.link,
+      url: data.link,
     });
   }, []);
+
   const likedList = useSelector((state: RootState) => state.details.liked);
-  const liked = likedList.includes(TEMP.id);
+
+  const liked = likedList.includes(data.id);
+
   const onPressLike = useCallback(() => {
     if (liked) {
-      dispatch(detailsSlice.actions.disliked(TEMP.id));
-      TEMP.like_cnt--;
+      dispatch(detailsSlice.actions.disliked(data.id));
+      data.like_cnt--;
     } else {
-      dispatch(detailsSlice.actions.liked(TEMP.id));
-      TEMP.like_cnt++;
+      dispatch(detailsSlice.actions.liked(data.id));
+      data.like_cnt++;
     }
   }, [liked, dispatch]);
+
   return (
     <View>
-      <Text>카드입니다~</Text>
-      <Pressable onPress={onPressShare}>
-        <Text>공유하기에요</Text>
-      </Pressable>
-      <Pressable>
-        <Text style={{color: liked ? 'red' : 'black'}} onPress={onPressLike}>
-          좋아효~ {TEMP.like_cnt}
-        </Text>
-      </Pressable>
+      <Image
+        style={{width: '100%'}}
+        source={{uri: data.image, height}}
+        resizeMode="cover"
+      />
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text>{data.upload_date}</Text>
+        <View style={{flexDirection: 'row'}}>
+          <Pressable>
+            <Text
+              style={{color: liked ? 'red' : 'black'}}
+              onPress={onPressLike}>
+              ♡{data.like_cnt}
+            </Text>
+          </Pressable>
+          <Pressable onPress={onPressShare}>
+            <Text>공유</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 };
