@@ -14,7 +14,6 @@ interface ContentType {
 
 interface InitialState {
   contents: ContentType[];
-  liked: number[];
 }
 
 const initialState: InitialState = {
@@ -53,7 +52,6 @@ const initialState: InitialState = {
       sort: 3,
     },
   ],
-  liked: [],
 };
 
 const contentsSlice = createSlice({
@@ -62,13 +60,6 @@ const contentsSlice = createSlice({
   reducers: {
     setContents(state, action) {
       state.contents = state.contents.concat(action.payload);
-    },
-    setLiked(state, action) {
-      if (state.liked.includes(action.payload)) {
-        state.liked = state.liked.filter(v => v !== action.payload);
-      } else {
-        state.liked.push(action.payload);
-      }
     },
   },
 });

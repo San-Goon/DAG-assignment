@@ -14,6 +14,7 @@ export interface DetailType {
 
 interface InitialState {
   details: DetailType[];
+  liked: number[];
 }
 
 const initialState: InitialState = {
@@ -69,6 +70,7 @@ const initialState: InitialState = {
       like_top: 1,
     },
   ],
+  liked: [],
 };
 
 const detailsSlice = createSlice({
@@ -77,6 +79,13 @@ const detailsSlice = createSlice({
   reducers: {
     setDetails(state, action) {
       state.details = state.details.concat(action.payload);
+    },
+    setLiked(state, action) {
+      if (state.liked.includes(action.payload)) {
+        state.liked = state.liked.filter(v => v !== action.payload);
+      } else {
+        state.liked.push(action.payload);
+      }
     },
   },
 });
