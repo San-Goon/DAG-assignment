@@ -80,12 +80,21 @@ const detailsSlice = createSlice({
     setDetails(state, action) {
       state.details = state.details.concat(action.payload);
     },
-    setLiked(state, action) {
-      if (state.liked.includes(action.payload)) {
-        state.liked = state.liked.filter(v => v !== action.payload);
-      } else {
-        state.liked.push(action.payload);
-      }
+    liked(state, action) {
+      state.liked.push(action.payload);
+      // state.details = state.details.map(v => {
+      //   if (v.id === action.payload) {
+      //     return {...v, like_cnt: v.like_cnt - 1};
+      //   } else return v;
+      // });
+    },
+    disliked(state, action) {
+      state.liked = state.liked.filter(v => v !== action.payload);
+      // state.details = state.details.map(v => {
+      //   if (v.id === action.payload) {
+      //     return {...v, like_cnt: v.like_cnt + 1};
+      //   } else return v;
+      // });
     },
   },
 });
