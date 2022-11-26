@@ -1,10 +1,11 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import CardComponent from '../components/CardComponent';
 
 const BJob = () => {
   return (
     <View>
-      <Text>BJob</Text>
+      <CardComponent />
     </View>
   );
 };
