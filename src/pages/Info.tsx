@@ -20,7 +20,11 @@ const Info = () => {
     getData();
   }, []);
   return (
-    <Tab.Navigator initialRouteName="알쓸B잡">
+    <Tab.Navigator
+      initialRouteName="알쓸B잡"
+      screenOptions={{
+        swipeEnabled: false,
+      }}>
       <Tab.Screen
         name="알쓸B잡"
         component={TabComponent}

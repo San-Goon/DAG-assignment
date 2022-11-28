@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-const DetailComponent = ({route}) => {
+const DetailComponent = ({route}: any) => {
   return (
     <View>
       <Text>DetailComponent</Text>

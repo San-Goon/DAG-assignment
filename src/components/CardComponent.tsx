@@ -1,10 +1,19 @@
 import React, {useState} from 'react';
-import {Image, Pressable, Share, Text, View, Dimensions} from 'react-native';
+import {
+  Image,
+  Pressable,
+  Share,
+  Text,
+  View,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import detailsSlice, {DetailType} from '../slices/details';
 import {useCallback} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/reducer';
 import {useAppDispatch} from '../store';
+import NewCardComponent from './NewCardComponent';
 
 interface PropsType {
   data?: DetailType;
@@ -63,7 +72,8 @@ const CardComponent = ({data: temp, navigation, route}: any) => {
   }, [navigation]);
 
   return (
-    <View>
+    <ScrollView>
+      <NewCardComponent />
       <Pressable onPress={onPressImage}>
         <Image
           style={{width: '100%'}}
@@ -87,7 +97,7 @@ const CardComponent = ({data: temp, navigation, route}: any) => {
           </Pressable>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
