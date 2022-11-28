@@ -23,7 +23,7 @@ const data = {
   like_top: 1,
 };
 
-const CardComponent = ({data: temp}: PropsType) => {
+const CardComponent = ({data: temp, navigation, route}: any) => {
   const [height, setHeight] = useState(0);
 
   // 이미지 크기 잡아주는 부분
@@ -54,15 +54,26 @@ const CardComponent = ({data: temp}: PropsType) => {
     }
   }, [liked, dispatch]);
 
+  console.log(navigation);
+
+  const onPressImage = useCallback(() => {
+    navigation.navigate('detail', {
+      link: data.link,
+    });
+  }, [navigation]);
+
   return (
     <View>
-      <Image
-        style={{width: '100%'}}
-        source={{uri: data.image, height}}
-        resizeMode="cover"
-      />
+      <Pressable onPress={onPressImage}>
+        <Image
+          style={{width: '100%'}}
+          source={{uri: data.image, height}}
+          resizeMode="cover"
+        />
+      </Pressable>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text>{data.upload_date}</Text>
+        <Text>{route.params.name}</Text>
         <View style={{flexDirection: 'row'}}>
           <Pressable>
             <Text
