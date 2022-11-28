@@ -6,7 +6,7 @@ import axios from 'axios';
 import Card from './Card';
 import {ContentType} from '../../types';
 
-const TabComponent = ({navigation, route}: any) => {
+const TabComponent = ({route}: any) => {
   const [contents, setContents] = useState<ContentType[]>([]);
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +61,7 @@ const TabComponent = ({navigation, route}: any) => {
         <NewCardComponent data={newArrivalContent} />
       ) : null}
       {contents.slice(0, count * 5).map((item: ContentType) => {
-        return <Card key={item.id} item={item} navigation={navigation} />;
+        return <Card key={item.id} item={item} />;
       })}
       {/*TODO: length 넘으면 안보이도록 조건부 렌더링 */}
       {contents.length <= count * 5 ? null : (

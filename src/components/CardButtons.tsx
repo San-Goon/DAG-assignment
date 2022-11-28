@@ -34,7 +34,7 @@ const CardButtons = ({item}: PropsType) => {
   }, [item, liked, dispatch]);
 
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={{flexDirection: 'row', marginRight: 20}}>
       <Pressable>
         <Text style={{color: liked ? 'red' : 'black'}} onPress={onPressLike}>
           ♡{item.like_cnt}
