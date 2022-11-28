@@ -13,7 +13,7 @@ const CarouselCardItem = ({item, index}: any) => {
         source={{uri: item.image, height: 100}}
         resizeMode="cover"
       />
-      {/*</Pressable>*/}`{' '}
+      {/*</Pressable>*/}
       <View
         style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontWeight: 'bold', fontSize: 15, color: 'black'}}>
