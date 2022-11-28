@@ -1,19 +1,36 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Pressable,
+  Linking,
+} from 'react-native';
+import {ContentType} from '../../types';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 
-const CarouselCardItem = ({item, index}: any) => {
+interface PropsType {
+  item: ContentType;
+  index: number;
+}
+
+const CarouselCardItem = ({item, index}: PropsType) => {
   return (
     <View style={styles.container} key={index}>
-      {/*<Pressable>*/}
-      <Image
-        style={styles.image}
-        source={{uri: item.image, height: 100}}
-        resizeMode="cover"
-      />
-      {/*</Pressable>*/}
+      <Pressable
+        onPress={() => {
+          Linking.openURL(item.link);
+        }}>
+        <Image
+          style={styles.image}
+          source={{uri: item.image, height: 100}}
+          resizeMode="cover"
+        />
+      </Pressable>
       <View
         style={{height: 50, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontWeight: 'bold', fontSize: 15, color: 'black'}}>

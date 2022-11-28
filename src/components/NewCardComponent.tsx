@@ -1,8 +1,9 @@
 import React from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import CarouselCardItem, {ITEM_WIDTH, SLIDER_WIDTH} from './CarouselCardIem';
 import {ContentType} from '../../types';
+import CardButtons from './CardButtons';
 
 interface PropsType {
   data: ContentType[];
@@ -11,7 +12,6 @@ interface PropsType {
 const NewCardComponent = ({data}: PropsType) => {
   const [index, setIndex] = React.useState(0);
   const isCarousel = React.useRef(null);
-  console.log(data);
 
   return (
     <View style={{backgroundColor: 'white', margin: 20, borderRadius: 10}}>
@@ -65,14 +65,7 @@ const NewCardComponent = ({data}: PropsType) => {
           inactiveDotScale={0.6}
           tappableDots={true}
         />
-        <View style={{flexDirection: 'row', marginRight: 20}}>
-          <Pressable>
-            <Text>♡{data[index].like_cnt}</Text>
-          </Pressable>
-          <Pressable>
-            <Text>공유</Text>
-          </Pressable>
-        </View>
+        <CardButtons item={data[index]} />
       </View>
     </View>
   );

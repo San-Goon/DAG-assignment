@@ -1,11 +1,8 @@
-import {Dimensions, Image, Pressable, Share, Text, View} from 'react-native';
+import {Dimensions, Image, Linking, Pressable, Text, View} from 'react-native';
 import React, {useCallback, useState} from 'react';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store/reducer';
-import detailsSlice from '../slices/details';
-import {useAppDispatch} from '../store';
+import CardButtons from './CardButtons';
 
-const Card = ({item, navigation}: any) => {
+const Card = ({item}: any) => {
   // 이미지 크기 잡아주는 부분
   const [height, setHeight] = useState(0);
 
@@ -14,33 +11,9 @@ const Card = ({item, navigation}: any) => {
     setHeight(h * (width / w));
   });
 
-  const dispatch = useAppDispatch();
-
-  const onPressShare = useCallback(() => {
-    Share.share({
-      url: item.link,
-    });
-  }, [item.link]);
-
-  const likedList = useSelector((state: RootState) => state.details.liked);
-
-  const liked = likedList.includes(item.id);
-
-  const onPressLike = useCallback(() => {
-    if (liked) {
-      dispatch(detailsSlice.actions.disliked(item.id));
-      item.like_cnt--;
-    } else {
-      dispatch(detailsSlice.actions.liked(item.id));
-      item.like_cnt++;
-    }
-  }, [item, liked, dispatch]);
-
   const onPressImage = useCallback(() => {
-    navigation.navigate('detail', {
-      link: item.link,
-    });
-  }, [item.link, navigation]);
+    Linking.openURL(item.link);
+  }, [item.link]);
   return (
     <View>
       <Pressable onPress={onPressImage}>
@@ -56,18 +29,7 @@ const Card = ({item, navigation}: any) => {
           justifyContent: 'space-between',
         }}>
         <Text>{item.upload_date}</Text>
-        <View style={{flexDirection: 'row'}}>
-          <Pressable>
-            <Text
-              style={{color: liked ? 'red' : 'black'}}
-              onPress={onPressLike}>
-              ♡{item.like_cnt}
-            </Text>
-          </Pressable>
-          <Pressable onPress={onPressShare}>
-            <Text>공유</Text>
-          </Pressable>
-        </View>
+        <CardButtons item={item} />
       </View>
     </View>
   );
