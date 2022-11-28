@@ -1,24 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import axios from 'axios';
 import TabComponent from '../components/TabComponent';
 
 const Info = () => {
   const Tab = createMaterialTopTabNavigator();
-  useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get(
-        'https://test.daground.io/info/contents',
-        {
-          headers: {
-            authorization: 'Bearer sandbankfrontend',
-          },
-        },
-      );
-      console.log(response);
-    };
-    getData();
-  }, []);
   return (
     <Tab.Navigator
       initialRouteName="알쓸B잡"
