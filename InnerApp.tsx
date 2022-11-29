@@ -11,20 +11,24 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="홈" component={Home} options={{headerShown: false}} />
+      <Tab.Navigator initialRouteName="Info">
         <Tab.Screen
-          name="투자"
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="Investment"
           component={Investment}
           options={{headerShown: false}}
         />
         <Tab.Screen
-          name="인포"
+          name="Info"
           component={Info}
           options={{headerShown: false}}
         />
         <Tab.Screen
-          name="설정"
+          name="Settings"
           component={Settings}
           options={{headerShown: false}}
         />
