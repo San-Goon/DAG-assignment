@@ -14,26 +14,31 @@ const Info = () => {
         name="Opinion"
         component={TabComponent}
         initialParams={{name: 'opinion'}}
+        options={{tabBarLabel: '알쓸B잡'}}
       />
       <Tab.Screen
         name="Youtube"
         component={TabComponent}
         initialParams={{name: 'youtube'}}
+        options={{tabBarLabel: '유튜브'}}
       />
       <Tab.Screen
         name="Insight"
         component={TabComponent}
         initialParams={{name: 'insight'}}
+        options={{tabBarLabel: '인사이트'}}
       />
       <Tab.Screen
         name="Quiz"
         component={TabComponent}
         initialParams={{name: 'quiz'}}
+        options={{tabBarLabel: '퀴즈'}}
       />
       <Tab.Screen
         name="Market"
         component={TabComponent}
         initialParams={{name: 'market'}}
+        options={{tabBarLabel: '마켓'}}
       />
     </Tab.Navigator>
   );
