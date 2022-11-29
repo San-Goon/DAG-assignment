@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {Image, Pressable, ScrollView, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/reducer';
@@ -9,6 +9,10 @@ import ShowMoreComponent from './ShowMoreComponent';
 const InsightTabDetail = ({route}: any) => {
   const navigation = useNavigation<any>();
 
+  useEffect(() => {
+    navigation.setOptions({title: route.params.title});
+  }, []);
+
   const content = useSelector(
     (state: RootState) => state.contents.insightContents,
   );
@@ -16,7 +20,10 @@ const InsightTabDetail = ({route}: any) => {
   const anotherContent = content.filter(v => v.id !== route.params.id);
 
   const onPressDetail = useCallback(() => {
-    navigation.navigate('WebviewComponent', {link: currentContent[0].link});
+    navigation.navigate('WebviewComponent', {
+      link: currentContent[0].link,
+      title: '리포트 본문',
+    });
   }, [currentContent, navigation]);
 
   return (

@@ -2,6 +2,8 @@ import {Image, Pressable} from 'react-native';
 import React, {useCallback} from 'react';
 import {ContentType} from '../../types';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store/reducer';
 
 interface PropsType {
   item: ContentType;
@@ -9,17 +11,27 @@ interface PropsType {
 
 const CardImage = ({item}: PropsType) => {
   const navigation = useNavigation<any>();
+  const sectors = useSelector((state: RootState) => state.sectors.sectors);
   const onPressImage = useCallback(() => {
     if (item.sector_id === 1) {
-      navigation.navigate('WebviewComponent', {link: item.link});
+      navigation.navigate('WebviewComponent', {
+        link: item.link,
+        title: sectors[0].title,
+      });
     }
     if (item.sector_id === 2) {
-      navigation.navigate('YoutubeTabDetail', {id: item.id});
+      navigation.navigate('YoutubeTabDetail', {
+        id: item.id,
+        title: sectors[1].title,
+      });
     }
     if (item.sector_id === 3) {
-      navigation.navigate('InsightTabDetail', {id: item.id});
+      navigation.navigate('InsightTabDetail', {
+        id: item.id,
+        title: sectors[2].title,
+      });
     }
-  }, [navigation, item]);
+  }, [sectors, navigation, item]);
   return (
     <Pressable onPress={onPressImage}>
       <Image

@@ -8,7 +8,7 @@ import InsightTabDetail from './InsightTabDetail';
 const TabComponent = ({route}: any) => {
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
       <Stack.Screen
         name="TabMain"
         component={TabMain}

@@ -1,15 +1,22 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/reducer';
 import YoutubePlayer, {YoutubeIframeRef} from 'react-native-youtube-iframe';
 import CardButtons from './CardButtons';
 import ShowMoreComponent from './ShowMoreComponent';
+import {useNavigation} from '@react-navigation/native';
 
 const YoutubeTabDetail = ({route}: any) => {
   const content = useSelector(
     (state: RootState) => state.contents.youtubeContents,
   );
+  const navigation = useNavigation<any>();
+
+  useEffect(() => {
+    navigation.setOptions({title: route.params.title});
+  }, []);
+
   const currentContent = content.filter(v => v.id === route.params.id);
   const anotherContent = content.filter(v => v.id !== route.params.id);
   const playerRef = useRef<YoutubeIframeRef>(null);
