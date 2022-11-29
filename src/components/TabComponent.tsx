@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabMain from './TabMain';
-import NormalTabDetail from './NormalTabDetail';
+import WebviewComponent from './WebviewComponent';
 import YoutubeTabDetail from './YoutubeTabDetail';
 import React from 'react';
 import InsightTabDetail from './InsightTabDetail';
@@ -15,7 +15,7 @@ const TabComponent = ({route}: any) => {
         options={{headerShown: false}}
         initialParams={{name: route.params.name}}
       />
-      <Stack.Screen name="NormalTabDetail" component={NormalTabDetail} />
+      <Stack.Screen name="WebviewComponent" component={WebviewComponent} />
       <Stack.Screen name="YoutubeTabDetail" component={YoutubeTabDetail} />
       <Stack.Screen name="InsightTabDetail" component={InsightTabDetail} />
     </Stack.Navigator>

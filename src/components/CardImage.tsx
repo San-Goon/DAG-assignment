@@ -11,7 +11,7 @@ const CardImage = ({item}: PropsType) => {
   const navigation = useNavigation<any>();
   const onPressImage = useCallback(() => {
     if (item.sector_id === 1) {
-      navigation.navigate('NormalTabDetail', {link: item.link});
+      navigation.navigate('WebviewComponent', {link: item.link});
     }
     if (item.sector_id === 2) {
       navigation.navigate('YoutubeTabDetail', {id: item.id});

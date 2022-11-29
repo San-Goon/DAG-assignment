@@ -1,8 +1,8 @@
 import React from 'react';
 import WebView from 'react-native-webview';
 
-const NormalTabDetail = ({route}: any) => {
+const WebviewComponent = ({route}: any) => {
   return <WebView source={{uri: route.params.link}} />;
 };
 
-export default NormalTabDetail;
+export default WebviewComponent;
