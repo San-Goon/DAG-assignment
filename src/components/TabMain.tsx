@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Pressable, Text, ScrollView, View} from 'react-native';
+import {Pressable, Text, FlatList} from 'react-native';
 import {useCallback} from 'react';
 import NewCardComponent from './NewCardComponent';
 import axios from 'axios';
@@ -69,20 +69,26 @@ const TabMain = () => {
     setCount(prev => prev + 1);
   }, []);
 
+  const renderItem = useCallback(({item}: {item: ContentType}) => {
+    return <Card item={item} />;
+  }, []);
+
   if (isLoading) {
     return null;
   }
 
   return (
-    <ScrollView>
-      {newArrivalContent.length ? (
-        <NewCardComponent data={newArrivalContent} />
-      ) : null}
-      <View style={{margin: 20, backgroundColor: 'white', borderRadius: 10}}>
-        {contents.slice(0, count * 5).map((item: ContentType) => {
-          return <Card key={item.id} item={item} />;
-        })}
-        {contents.length <= count * 5 ? null : (
+    <FlatList
+      ListHeaderComponent={
+        newArrivalContent.length ? (
+          <NewCardComponent data={newArrivalContent} />
+        ) : null
+      }
+      data={contents.slice(0, count * 5)}
+      renderItem={renderItem}
+      keyExtractor={item => item.id.toString()}
+      ListFooterComponent={
+        contents.length <= count * 5 ? null : (
           <Pressable
             onPress={onPressShowMore}
             style={{
@@ -96,9 +102,9 @@ const TabMain = () => {
               더보기
             </Text>
           </Pressable>
-        )}
-      </View>
-    </ScrollView>
+        )
+      }
+    />
   );
 };
 
