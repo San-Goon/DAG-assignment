@@ -1,5 +1,5 @@
-import {Dimensions, Image, Linking, Pressable} from 'react-native';
-import React, {useCallback, useState} from 'react';
+import {Image, Linking, Pressable} from 'react-native';
+import React, {useCallback} from 'react';
 import {ContentType} from '../../types';
 
 interface PropsType {
@@ -7,14 +7,6 @@ interface PropsType {
 }
 
 const CardImage = ({item}: PropsType) => {
-  // 이미지 크기 잡아주는 부분
-  const [height, setHeight] = useState(0);
-
-  const {width} = Dimensions.get('window');
-  Image.getSize(item.image, (w, h) => {
-    setHeight(h * (width / w));
-  });
-
   const onPressImage = useCallback(() => {
     Linking.openURL(
       item.sector_id === 2
@@ -26,8 +18,8 @@ const CardImage = ({item}: PropsType) => {
     <Pressable onPress={onPressImage}>
       <Image
         style={{width: '100%'}}
-        source={{uri: item.image, height}}
-        resizeMode="cover"
+        source={{uri: item.image, height: 150}}
+        resizeMode="contain"
       />
     </Pressable>
   );

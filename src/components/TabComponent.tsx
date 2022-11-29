@@ -1,19 +1,24 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Pressable, Text, ScrollView} from 'react-native';
+import {Pressable, Text, ScrollView, View} from 'react-native';
 import {useCallback} from 'react';
 import NewCardComponent from './NewCardComponent';
 import axios from 'axios';
 import Card from './Card';
 import {ContentType} from '../../types';
 
-const TabComponent = ({route}: any) => {
+// TODO: any 없애기
+interface PropsType {
+  route: any;
+}
+
+const TabComponent = ({route}: PropsType) => {
   const [contents, setContents] = useState<ContentType[]>([]);
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const queryIdx =
-    route.params.name === 'opinion'
+    route?.params?.name === 'opinion'
       ? 1
-      : route.params.name === 'youtube'
+      : route?.params?.name === 'youtube'
       ? 2
       : 3;
 
@@ -60,15 +65,26 @@ const TabComponent = ({route}: any) => {
       {newArrivalContent.length ? (
         <NewCardComponent data={newArrivalContent} />
       ) : null}
-      {contents.slice(0, count * 5).map((item: ContentType) => {
-        return <Card key={item.id} item={item} />;
-      })}
-      {/*TODO: length 넘으면 안보이도록 조건부 렌더링 */}
-      {contents.length <= count * 5 ? null : (
-        <Pressable onPress={onPressShowMore}>
-          <Text>더보기</Text>
-        </Pressable>
-      )}
+      <View style={{margin: 20, backgroundColor: 'white', borderRadius: 10}}>
+        {contents.slice(0, count * 5).map((item: ContentType) => {
+          return <Card key={item.id} item={item} />;
+        })}
+        {contents.length <= count * 5 ? null : (
+          <Pressable
+            onPress={onPressShowMore}
+            style={{
+              backgroundColor: '#F1F5FE',
+              alignItems: 'center',
+              paddingVertical: 10,
+              borderRadius: 20,
+              margin: 20,
+            }}>
+            <Text style={{color: '#7D9FEC', fontWeight: 'bold', fontSize: 16}}>
+              더보기
+            </Text>
+          </Pressable>
+        )}
+      </View>
     </ScrollView>
   );
 };

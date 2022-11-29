@@ -10,7 +10,7 @@ interface PropsType {
 
 const Card = ({item}: PropsType) => {
   return (
-    <View>
+    <View style={{margin: 20}}>
       <CardImage item={item} />
       <View
         style={{
