@@ -2,8 +2,16 @@ import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import TabComponent from '../components/TabComponent';
 
+export type InfoTopTabParamList = {
+  Opinion: {name: string};
+  Youtube: {name: string};
+  Insight: {name: string};
+  Quiz: {name: string};
+  Market: {name: string};
+};
+
 const Info = () => {
-  const Tab = createMaterialTopTabNavigator();
+  const Tab = createMaterialTopTabNavigator<InfoTopTabParamList>();
   return (
     <Tab.Navigator
       initialRouteName="Opinion"

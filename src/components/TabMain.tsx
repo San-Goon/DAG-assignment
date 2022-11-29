@@ -8,21 +8,19 @@ import {ContentType} from '../../types';
 import {useAppDispatch} from '../store';
 import contentsSlice from '../slices/contents';
 import sectorsSlice from '../slices/sectors';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import {TabStackParamList} from './TabComponent';
 
-// TODO: any 없애기
-interface PropsType {
-  route: any;
-}
-
-const TabMain = ({route}: PropsType) => {
+const TabMain = () => {
+  const route = useRoute<RouteProp<TabStackParamList, 'TabMain'>>();
   const [contents, setContents] = useState<ContentType[]>([]);
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const queryIdx =
-    route?.params?.name === 'opinion'
+    route.params.name === 'opinion'
       ? 1
-      : route?.params?.name === 'youtube'
+      : route.params.name === 'youtube'
       ? 2
       : 3;
 

@@ -6,8 +6,15 @@ import Info from './src/pages/Info';
 import Home from './src/pages/Home';
 import Investment from './src/pages/Investment';
 
+export type RootStackParamList = {
+  Home: undefined;
+  Investment: undefined;
+  Info: undefined;
+  Settings: undefined;
+};
+
 const App = () => {
-  const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator<RootStackParamList>();
 
   return (
     <NavigationContainer>

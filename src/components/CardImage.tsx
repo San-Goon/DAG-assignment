@@ -1,16 +1,17 @@
 import {Image, Pressable} from 'react-native';
 import React, {useCallback} from 'react';
 import {ContentType} from '../../types';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/reducer';
+import {TabStackParamList} from './TabComponent';
 
 interface PropsType {
   item: ContentType;
 }
 
 const CardImage = ({item}: PropsType) => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<NavigationProp<TabStackParamList>>();
   const sectors = useSelector((state: RootState) => state.sectors.sectors);
   const onPressImage = useCallback(() => {
     if (item.sector_id === 1) {

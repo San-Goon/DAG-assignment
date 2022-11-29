@@ -5,13 +5,21 @@ import {RootState} from '../store/reducer';
 import YoutubePlayer, {YoutubeIframeRef} from 'react-native-youtube-iframe';
 import CardButtons from './CardButtons';
 import ShowMoreComponent from './ShowMoreComponent';
-import {useNavigation} from '@react-navigation/native';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import {TabStackParamList} from './TabComponent';
 
-const YoutubeTabDetail = ({route}: any) => {
+const YoutubeTabDetail = () => {
+  const route = useRoute<RouteProp<TabStackParamList, 'YoutubeTabDetail'>>();
+
   const content = useSelector(
     (state: RootState) => state.contents.youtubeContents,
   );
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<NavigationProp<TabStackParamList>>();
 
   useEffect(() => {
     navigation.setOptions({title: route.params.title});

@@ -3,11 +3,18 @@ import {Image, Pressable, ScrollView, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/reducer';
 import CardButtons from './CardButtons';
-import {useNavigation} from '@react-navigation/native';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import ShowMoreComponent from './ShowMoreComponent';
+import {TabStackParamList} from './TabComponent';
 
-const InsightTabDetail = ({route}: any) => {
-  const navigation = useNavigation<any>();
+const InsightTabDetail = () => {
+  const route = useRoute<RouteProp<TabStackParamList, 'InsightTabDetail'>>();
+  const navigation = useNavigation<NavigationProp<TabStackParamList>>();
 
   useEffect(() => {
     navigation.setOptions({title: route.params.title});
