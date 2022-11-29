@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Info">
+      <Tab.Navigator initialRouteName="Home">
         <Tab.Screen
           name="Home"
           component={Home}
