@@ -46,9 +46,16 @@ const TabMain = ({route}: PropsType) => {
           },
         );
         setContents(response.data.content);
-        dispatch(
-          contentsSlice.actions.setYoutubeContents(response.data.content),
-        );
+        if (queryIdx === 2) {
+          dispatch(
+            contentsSlice.actions.setYoutubeContents(response.data.content),
+          );
+        }
+        if (queryIdx === 3) {
+          dispatch(
+            contentsSlice.actions.setInsightContents(response.data.content),
+          );
+        }
       } catch (error) {
         console.error(error);
       } finally {
@@ -56,7 +63,7 @@ const TabMain = ({route}: PropsType) => {
       }
     };
     getData();
-  }, [queryIdx]);
+  }, [dispatch, queryIdx]);
 
   const onPressShowMore = useCallback(() => {
     setCount(prev => prev + 1);
