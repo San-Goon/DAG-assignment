@@ -4,7 +4,7 @@ import NormalTabDetail from './NormalTabDetail';
 import YoutubeTabDetail from './YoutubeTabDetail';
 import React from 'react';
 
-const TabComponent = ({route}) => {
+const TabComponent = ({route}: any) => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
