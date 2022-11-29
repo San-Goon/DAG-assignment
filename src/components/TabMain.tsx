@@ -7,6 +7,7 @@ import Card from './Card';
 import {ContentType} from '../../types';
 import {useAppDispatch} from '../store';
 import contentsSlice from '../slices/contents';
+import sectorsSlice from '../slices/sectors';
 
 // TODO: any 없애기
 interface PropsType {
@@ -46,6 +47,7 @@ const TabMain = ({route}: PropsType) => {
           },
         );
         setContents(response.data.content);
+        dispatch(sectorsSlice.actions.setSectors(response.data.sector));
         if (queryIdx === 2) {
           dispatch(
             contentsSlice.actions.setYoutubeContents(response.data.content),
