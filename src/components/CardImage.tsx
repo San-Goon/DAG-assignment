@@ -1,19 +1,21 @@
-import {Image, Linking, Pressable} from 'react-native';
+import {Image, Pressable} from 'react-native';
 import React, {useCallback} from 'react';
 import {ContentType} from '../../types';
+import {useNavigation} from '@react-navigation/native';
 
 interface PropsType {
   item: ContentType;
 }
 
 const CardImage = ({item}: PropsType) => {
+  const navigation = useNavigation<any>();
   const onPressImage = useCallback(() => {
-    Linking.openURL(
-      item.sector_id === 2
-        ? `https://www.youtube.com/watch?v=${item.link}`
-        : item.link,
-    );
-  }, [item]);
+    if (item.sector_id === 2) {
+      navigation.navigate('YoutubeTabDetail', {id: item.id});
+    } else {
+      navigation.navigate('NormalTabDetail', {link: item.link});
+    }
+  }, [navigation, item]);
   return (
     <Pressable onPress={onPressImage}>
       <Image

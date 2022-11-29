@@ -6,32 +6,32 @@ const Info = () => {
   const Tab = createMaterialTopTabNavigator();
   return (
     <Tab.Navigator
-      initialRouteName="알쓸B잡"
+      initialRouteName="Opinion"
       screenOptions={{
         swipeEnabled: false,
       }}>
       <Tab.Screen
-        name="알쓸B잡"
+        name="Opinion"
         component={TabComponent}
         initialParams={{name: 'opinion'}}
       />
       <Tab.Screen
-        name="유튜브"
+        name="Youtube"
         component={TabComponent}
         initialParams={{name: 'youtube'}}
       />
       <Tab.Screen
-        name="인사이트"
+        name="Insight"
         component={TabComponent}
         initialParams={{name: 'insight'}}
       />
       <Tab.Screen
-        name="퀴즈"
+        name="Quiz"
         component={TabComponent}
         initialParams={{name: 'quiz'}}
       />
       <Tab.Screen
-        name="마켓"
+        name="Market"
         component={TabComponent}
         initialParams={{name: 'market'}}
       />
