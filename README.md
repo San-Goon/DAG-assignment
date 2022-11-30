@@ -6,6 +6,7 @@
 
 ## Installation
 ```bash
+npm i
 npm run android # android studio setting이 되어있어야 합니다.
 ```
 </br>
